@@ -18,6 +18,8 @@ class BiodataController extends Controller
     {
         $items = User::whereHas('roles', function ($query) {
             return $query->where('roles', '=', 2);
+        })->whereHas('biodata', function ($query) {
+            return $query->where('posisi', '!=', null);
         })->get();
         return view('pages.ne_biodata.index', [
             'items' => $items
